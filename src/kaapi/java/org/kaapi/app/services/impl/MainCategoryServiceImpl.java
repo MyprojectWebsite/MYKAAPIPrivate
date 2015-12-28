@@ -38,6 +38,9 @@ public class MainCategoryServiceImpl implements MainCategoryService{
 				dto.setMainCategoryLogoUrl(rs.getString("Maincategorylogourl"));
 				dto.setMainCategoryOrder(rs.getInt("Maincategoryorder"));
 				dto.setMainCategoryId(rs.getInt("Maincategoryid"));
+				dto.setBackgroundImage(rs.getString("bgImage"));
+				dto.setColor(rs.getString("color"));
+				dto.setStatus(rs.getBoolean("status"));
 				maincategory.add(dto);
 			}
 			return maincategory;
@@ -59,6 +62,7 @@ public class MainCategoryServiceImpl implements MainCategoryService{
 		MainCategory dto = null;
 		try {
 			ResultSet rs = null;
+			List<MainCategory> maincategory = new ArrayList<MainCategory>();
 			String sql = "SELECT MC.*, COUNT(C.categoryid) COUNTCATEGORY FROM TBLMAINCATEGORY MC LEFT JOIN TBLCATEGORY C ON MC.maincategoryid=C.maincategoryid WHERE MC.maincategoryid=? GROUP BY MC.maincategoryid";
 			con=dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -72,7 +76,12 @@ public class MainCategoryServiceImpl implements MainCategoryService{
 				dto.setMainCategoryLogoUrl(rs.getString("maincategorylogourl"));
 				dto.setMainCategoryOrder(rs.getInt("maincategoryorder"));
 				dto.setCountCategory(rs.getInt("countcategory"));
+				dto.setBackgroundImage(rs.getString("bgImage"));
+				dto.setColor(rs.getString("color"));
+				dto.setStatus(rs.getBoolean("status"));
+				maincategory.add(dto);
 			}
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -96,12 +105,15 @@ public class MainCategoryServiceImpl implements MainCategoryService{
 			if(rs.next())
 				num =rs.getInt(1)+1;
 			
-			String sql = "INSERT INTO TBLMAINCATEGORY VALUES(NEXTVAL('seq_maincategory'), ?, ?, ?)";
+			String sql = "INSERT INTO TBLMAINCATEGORY VALUES(NEXTVAL('seq_maincategory'), ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getMainCategoryName());
-			ps.setString(2, dto.getMainCategoryLogoUrl());
+			ps.setString(2, dto.getMainCategoryLogoUrl());			
 			ps.setInt(3,num);
+			ps.setString(4, dto.getBackgroundImage());
+			ps.setString(5, dto.getColor());
+			ps.setBoolean(6,dto.isStatus());
 			if(ps.executeUpdate()>0)
 				return true;
 		} catch (SQLException e) {
@@ -124,7 +136,7 @@ public class MainCategoryServiceImpl implements MainCategoryService{
 					+ "from tblmaincategory "
 					+ "where maincategoryid=?) "
 					+ "where maincategoryorder=?;"
-					+ "update tblmaincategory set Maincategoryname=?, Maincategorylogourl=?, Maincategoryorder=? WHERE maincategoryid=?";
+					+ "update tblmaincategory set Maincategoryname=?, Maincategorylogourl=?, Maincategoryorder=?,bgimage=?,color=?,status=? WHERE maincategoryid=?";
 			con=dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, dto.getMainCategoryId());
@@ -132,7 +144,10 @@ public class MainCategoryServiceImpl implements MainCategoryService{
 			ps.setString(3, dto.getMainCategoryName());
 			ps.setString(4, dto.getMainCategoryLogoUrl());
 			ps.setInt(5, dto.getMainCategoryOrder());
-			ps.setInt(6, dto.getMainCategoryId());
+			ps.setString(6, dto.getBackgroundImage());
+			ps.setString(7, dto.getColor());
+			ps.setBoolean(8, dto.isStatus());
+			ps.setInt(9, dto.getMainCategoryId());
 			if(ps.executeUpdate() > 0) {
 				return true;
 			}

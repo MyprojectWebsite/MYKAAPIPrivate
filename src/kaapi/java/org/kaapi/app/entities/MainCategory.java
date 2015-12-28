@@ -7,6 +7,9 @@ public class MainCategory {
 	private String mainCategoryLogoUrl;
 	private int mainCategoryOrder;
 	private int countCategory;
+	private String backgroundImage;
+	private String Color;
+	private boolean status;
 	
 	public int getMainCategoryId() {
 		return mainCategoryId;
@@ -38,11 +41,32 @@ public class MainCategory {
 	public void setCountCategory(int countCategory) {
 		this.countCategory = countCategory;
 	}
+	public String getBackgroundImage() {
+		return backgroundImage;
+	}
+	public void setBackgroundImage(String backgroundImage) {
+		this.backgroundImage = backgroundImage;
+	}
+	public String getColor() {
+		return Color;
+	}
+	public void setColor(String color) {
+		Color = color;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
 	@Override
 	public String toString() {
 		return "MainCategory [mainCategoryId=" + mainCategoryId + ", mainCategoryName=" + mainCategoryName
 				+ ", mainCategoryLogoUrl=" + mainCategoryLogoUrl + ", mainCategoryOrder=" + mainCategoryOrder
-				+ ", countCategory=" + countCategory + "]";
+				+ ", countCategory=" + countCategory + ", backgroundImage=" + backgroundImage + ", Color=" + Color
+				+ ", status=" + status + "]";
 	}
+	
 
 }

@@ -70,6 +70,7 @@ public class MainCategoryController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Map<String, Object>> updateMainCategory(@RequestBody MainCategory maincategory) {
 
+			System.err.println(maincategory.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (mainCategoryService.updateMainCategory(maincategory)) {
 			map.put("STATUS", true);
