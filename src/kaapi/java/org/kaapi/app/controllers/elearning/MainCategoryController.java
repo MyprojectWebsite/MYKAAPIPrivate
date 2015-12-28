@@ -38,12 +38,12 @@ public class MainCategoryController {
 		map.put("RES_DATA", list);
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/getmaincategory/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMainCategory(@PathVariable("id") int maincategoryid) {
 		MainCategory list = mainCategoryService.getMainCategory(maincategoryid);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (list==null) {
+		if (list == null) {
 			map.put("STATUS", false);
 			map.put("MESSAGE", "RECORD NOT FOUND");
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
@@ -70,7 +70,7 @@ public class MainCategoryController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Map<String, Object>> updateMainCategory(@RequestBody MainCategory maincategory) {
 
-			System.err.println(maincategory.toString());
+		System.err.println(maincategory.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (mainCategoryService.updateMainCategory(maincategory)) {
 			map.put("STATUS", true);
@@ -96,8 +96,6 @@ public class MainCategoryController {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 	}
 
-	
-	
 	/*
 	 * public void AddMainCategory(){} public void DeleteMainCategory(){} public
 	 * void UpdateMainCategory(){} public void GetMainCategory(){} public void
