@@ -45,5 +45,11 @@ public class Category {
 	public void setCountVideos(int countVideos) {
 		this.countVideos = countVideos;
 	}
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryLogoUrl="
+				+ categoryLogoUrl + ", mainCategoryId=" + mainCategoryId + ", mainCategoryName=" + mainCategoryName
+				+ ", countVideos=" + countVideos + "]";
+	}
 	
 }
